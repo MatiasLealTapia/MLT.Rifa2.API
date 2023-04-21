@@ -6,7 +6,7 @@ namespace MLT.Rifa2.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrganizationTypeController : Controller
+    public class OrganizationTypeController : ControllerBase
     {
         private readonly IOrganizationTypeService _organizationTypeService;
         public OrganizationTypeController(IOrganizationTypeService organizationTypeService)
