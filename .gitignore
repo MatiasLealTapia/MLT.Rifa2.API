@@ -3,3 +3,11 @@
 ################################################################################
 
 /.vs/MLT.Rifa2.API
+/.vs/MLT.Rifa2.API/v17/.wsuo
+/obj/Debug/net6.0/MLT.Rifa2.API.assets.cache
+/obj/Debug/net6.0/MLT.Rifa2.API.GeneratedMSBuildEditorConfig.editorconfig
+/obj/Debug/net6.0/MLT.Rifa2.API.csproj.AssemblyReference.cache
+/obj/MLT.Rifa2.API.csproj.nuget.g.props
+/obj/MLT.Rifa2.API.csproj.nuget.dgspec.json
+/obj/project.nuget.cache
+/obj/project.assets.json
