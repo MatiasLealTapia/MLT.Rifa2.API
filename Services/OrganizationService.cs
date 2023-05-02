@@ -30,7 +30,7 @@ namespace MLT.Rifa2.API.Services
                     OrganizationName = organizationDTO.OrganizationName,
                     OrganizationTypeId = organizationDTO.OrganizationTypeId,
                     CreationDate = DateTime.Now,
-                    IsActive = false,
+                    IsActive = organizationDTO.IsActive,
                     IsDeleted = false,
                 };
                 context.Organization.Add(objAdd);
