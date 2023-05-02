@@ -57,6 +57,7 @@ namespace MLT.Rifa2.API.Services
             var objDelete = await context.Organization.FirstOrDefaultAsync(x => x.OrganizationId == organizationDTO.OrganizationId && x.IsDeleted == false);
             if (objDelete != null)
             {
+                objDelete.IsActive = false;
                 objDelete.IsDeleted = true;
             }
             await context.SaveChangesAsync();
@@ -64,6 +65,7 @@ namespace MLT.Rifa2.API.Services
             {
                 OrganizationId = objDelete.OrganizationId,
                 OrganizationName = objDelete.OrganizationName,
+                IsActive = objDelete.IsActive,
                 IsDeleted = objDelete.IsDeleted,
             };
         }
