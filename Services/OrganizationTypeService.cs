@@ -8,10 +8,12 @@ namespace MLT.Rifa2.API.Services
     public class OrganizationTypeService : IOrganizationTypeService
     {
         private readonly Rifa2DbContext context;
+        private readonly IGenericService _genericService;
 
-        public OrganizationTypeService(Rifa2DbContext context)
+        public OrganizationTypeService(Rifa2DbContext context, IGenericService genericService)
         {
             this.context = context;
+            _genericService = genericService;
         }
         public async Task<OrganizationTypeDTO> Add(OrganizationTypeDTO organizationTypeDTO)
         {
@@ -41,6 +43,10 @@ namespace MLT.Rifa2.API.Services
         public async Task<OrganizationTypeDTO> Delete(OrganizationTypeDTO organizationTypeDTO)
         {
             var objDelete = await context.OrganizationType.FirstOrDefaultAsync(x => x.OrganizationTypeId == organizationTypeDTO.OrganizationTypeId && x.IsDeleted == false);
+            if (_genericService.GetOrganizationsByType(organizationTypeDTO.OrganizationTypeId).Result.Any())
+            {
+                throw new Exception("NO puedes borrar un tipo de organización que una organización tenga asignada.");
+            }
             if (objDelete != null)
             {
                 objDelete.IsDeleted = true;
@@ -101,18 +107,25 @@ namespace MLT.Rifa2.API.Services
 
         public async Task<OrganizationTypeDTO> Update(OrganizationTypeDTO organizationTypeDTO)
         {
-            var objUpdate = await context.OrganizationType.FirstOrDefaultAsync(x => x.OrganizationTypeId == organizationTypeDTO.OrganizationTypeId && x.IsDeleted == false);
-            if (objUpdate != null)
+            try
             {
-                objUpdate.OrganizationTypeName = organizationTypeDTO.OrganizationTypeName;
+                var objUpdate = await context.OrganizationType.FirstOrDefaultAsync(x => x.OrganizationTypeId == organizationTypeDTO.OrganizationTypeId && x.IsDeleted == false);
+                if (objUpdate != null)
+                {
+                    objUpdate.OrganizationTypeName = organizationTypeDTO.OrganizationTypeName;
+                }
+                await context.SaveChangesAsync();
+                return new OrganizationTypeDTO
+                {
+                    OrganizationTypeId = objUpdate.OrganizationTypeId,
+                    OrganizationTypeName = objUpdate.OrganizationTypeName,
+                    IsDeleted = false,
+                };
+            } 
+            catch (Exception ex)
+            {
+                throw ex;
             }
-            await context.SaveChangesAsync();
-            return new OrganizationTypeDTO
-            {
-                OrganizationTypeId = objUpdate.OrganizationTypeId,
-                OrganizationTypeName = objUpdate.OrganizationTypeName,
-                IsDeleted = false,
-            };
         }
     }
 }

@@ -25,7 +25,7 @@ namespace MLT.Rifa2.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest();
+                throw ex;
             }
         }
         [HttpGet]
@@ -42,8 +42,7 @@ namespace MLT.Rifa2.API.Controllers
             }
             catch (Exception ex)
             {
-
-                return NotFound();
+                throw ex;
             }
         }
         [HttpPut]
@@ -60,7 +59,7 @@ namespace MLT.Rifa2.API.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
+                throw ex;
             }
         }
         [HttpDelete]
@@ -77,8 +76,7 @@ namespace MLT.Rifa2.API.Controllers
             }
             catch (Exception ex)
             {
-
-                return NotFound();
+                throw ex;
             }
         }
         [HttpGet]
@@ -91,8 +89,7 @@ namespace MLT.Rifa2.API.Controllers
             }
             catch (Exception ex)
             {
-
-                return NotFound();
+                throw ex;
             }
         }
     }

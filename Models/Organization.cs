@@ -10,6 +10,7 @@ namespace MLT.Rifa2.API.Models
         public int OrganizationTypeId { get; set; }
         public OrganizationType OrganizationType { get; set; }
         public DateTime CreationDate { get; set; }
+        public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

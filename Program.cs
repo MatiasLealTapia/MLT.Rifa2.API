@@ -14,6 +14,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<Rifa2DbContext>(options => options.UseSqlServer("name=DefaultConnection"));
 
 builder.Services.AddScoped<IOrganizationTypeService, OrganizationTypeService>();
+builder.Services.AddScoped<IOrganizationService, OrganizationService>();
+builder.Services.AddScoped<IGenericService, GenericService>();
 
 var app = builder.Build();
 
