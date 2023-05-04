@@ -54,20 +54,31 @@ namespace MLT.Rifa2.API.Services
 
         public async Task<OrganizationDTO> Delete(OrganizationDTO organizationDTO)
         {
-            var objDelete = await context.Organization.FirstOrDefaultAsync(x => x.OrganizationId == organizationDTO.OrganizationId && x.IsDeleted == false);
-            if (objDelete != null)
+            try
             {
-                objDelete.IsActive = false;
-                objDelete.IsDeleted = true;
+                var objDelete = await context.Organization.FirstOrDefaultAsync(x => x.OrganizationId == organizationDTO.OrganizationId && x.IsDeleted == false);
+                var orgType = await _genericService.GetOrganizationType(objDelete.OrganizationTypeId);
+                if (objDelete != null)
+                {
+                    objDelete.IsActive = false;
+                    objDelete.IsDeleted = true;
+                }
+                await context.SaveChangesAsync();
+                return new OrganizationDTO
+                {
+                    OrganizationId = objDelete.OrganizationId,
+                    OrganizationName = objDelete.OrganizationName,
+                    OrganizationTypeId = objDelete.OrganizationTypeId,
+                    OrganizationTypeName = orgType.Detail,
+                    CreationDate = objDelete.CreationDate,
+                    IsActive = objDelete.IsActive,
+                    IsDeleted = objDelete.IsDeleted,
+                };
             }
-            await context.SaveChangesAsync();
-            return new OrganizationDTO
+            catch (Exception ex)
             {
-                OrganizationId = objDelete.OrganizationId,
-                OrganizationName = objDelete.OrganizationName,
-                IsActive = objDelete.IsActive,
-                IsDeleted = objDelete.IsDeleted,
-            };
+                throw ex;
+            }
         }
 
         public async Task<OrganizationDTO> Get(int idObj)
@@ -89,7 +100,9 @@ namespace MLT.Rifa2.API.Services
                                    };
                 var obj = objAnonymous.FirstOrDefault(x => x.OrganizationId == idObj);
                 if (obj == null)
+                {
                     return null;
+                }
                 return new OrganizationDTO
                 {
                     OrganizationId = obj.OrganizationId,
@@ -124,7 +137,9 @@ namespace MLT.Rifa2.API.Services
                               IsDeleted = o.IsDeleted,
                           };
                 if (obj == null)
+                {
                     return null;
+                }
                 List<OrganizationDTO> organizationList = new List<OrganizationDTO>();
                 foreach (var item in obj.ToList())
                 {

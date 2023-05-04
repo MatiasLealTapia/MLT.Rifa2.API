@@ -53,9 +53,9 @@ namespace MLT.Rifa2.API.Controllers
         {
             try
             {
-                if (organizationDTO.OrganizationTypeId < 1)
+                if (organizationDTO.OrganizationId < 1)
                     return BadRequest();
-                if (await _organizationService.Get(organizationDTO.OrganizationTypeId) == null)
+                if (await _organizationService.Get(organizationDTO.OrganizationId) == null)
                     return NotFound();
                 return Ok(await _organizationService.Update(organizationDTO));
             }
@@ -70,15 +70,14 @@ namespace MLT.Rifa2.API.Controllers
         {
             try
             {
-                if (organizationDTO.OrganizationTypeId < 1)
+                if (organizationDTO.OrganizationId < 1)
                     return BadRequest();
-                if (await _organizationService.Get(organizationDTO.OrganizationTypeId) == null)
+                if (await _organizationService.Get(organizationDTO.OrganizationId) == null)
                     return NotFound();
                 return Ok(await _organizationService.Delete(organizationDTO));
             }
             catch (Exception ex)
             {
-
                 return NotFound();
             }
         }
@@ -92,7 +91,6 @@ namespace MLT.Rifa2.API.Controllers
             }
             catch (Exception ex)
             {
-
                 return NotFound();
             }
         }

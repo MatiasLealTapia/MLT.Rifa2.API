@@ -18,7 +18,9 @@ namespace MLT.Rifa2.API.Services
             {
                 var obj = context.OrganizationType.ToList().Where(x => x.IsDeleted == false);
                 if (obj == null)
+                {
                     return null;
+                }
                 List<GenericItemDTO> organizationTypeList = new List<GenericItemDTO>();
                 foreach (var item in obj.ToList())
                 {
@@ -42,7 +44,9 @@ namespace MLT.Rifa2.API.Services
             {
                 var obj = await context.OrganizationType.FirstOrDefaultAsync(x => x.OrganizationTypeId == idObj && x.IsDeleted == false);
                 if (obj == null)
+                {
                     return null;
+                }
                 return new GenericItemDTO
                 {
                     Id = obj.OrganizationTypeId,
@@ -61,7 +65,9 @@ namespace MLT.Rifa2.API.Services
             {
                 var obj = context.Organization.ToList().Where(x => x.IsDeleted == false && x.OrganizationTypeId == idType);
                 if (obj == null)
+                {
                     return null;
+                }
                 List<GenericItemDTO> organizationList = new List<GenericItemDTO>();
                 foreach (var item in obj.ToList())
                 {
@@ -72,6 +78,168 @@ namespace MLT.Rifa2.API.Services
                     });
                 }
                 return organizationList;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<List<GenericItemDTO>> GetOrganizations()
+        {
+            try
+            {
+                var obj = context.Organization.ToList().Where(x => x.IsDeleted == false);
+                if (obj == null)
+                {
+                    return null;
+                }
+                List<GenericItemDTO> organizationList = new List<GenericItemDTO>();
+                foreach (var item in obj.ToList())
+                {
+                    organizationList.Add(new GenericItemDTO
+                    {
+                        Id = item.OrganizationId,
+                        Detail = item.OrganizationName
+                    });
+                }
+                return organizationList;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<GenericItemDTO> GetOrganization(int idObj)
+        {
+            try
+            {
+                var obj = await context.Organization.FirstOrDefaultAsync(x => x.OrganizationId == idObj && x.IsDeleted == false);
+                if (obj == null)
+                {
+                    return null;
+                }
+                return new GenericItemDTO
+                {
+                    Id = obj.OrganizationId,
+                    Detail = obj.OrganizationName
+                };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<List<GenericItemDTO>> GetReferents()
+        {
+            try
+            {
+                var obj = context.Referent.ToList().Where(x => x.IsDeleted == false);
+                if (obj == null)
+                {
+                    return null;
+                }
+                List<GenericItemDTO> referentList = new List<GenericItemDTO>();
+                foreach (var item in obj.ToList())
+                {
+                    referentList.Add(new GenericItemDTO
+                    {
+                        Id = item.ReferentId,
+                        Detail = item.ReferentRUT.ToString()
+                    });
+                }
+                return referentList;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<GenericItemDTO> GetReferent(int idObj)
+        {
+            try
+            {
+                var obj = await context.Referent.FirstOrDefaultAsync(x => x.ReferentId == idObj && x.IsDeleted == false);
+                if (obj == null)
+                {
+                    return null;
+                }
+                return new GenericItemDTO
+                {
+                    Id = obj.ReferentId,
+                    Detail = obj.ReferentRUT.ToString()
+                };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<GenericItemDTO> GetReferentByRut(int referentRut)
+        {
+            try
+            {
+                var obj = await context.Referent.FirstOrDefaultAsync(x => x.ReferentRUT == referentRut && x.IsDeleted == false);
+                if (obj == null)
+                {
+                    return null;
+                }
+                return new GenericItemDTO
+                {
+                    Id = obj.ReferentId,
+                    Detail = obj.ReferentRUT.ToString()
+                };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<GenericItemDTO> GetReferentByEmail(string referentEmail)
+        {
+            try
+            {
+                var obj = await context.Referent.FirstOrDefaultAsync(x => x.ReferentEmail == referentEmail && x.IsDeleted == false);
+                if (obj == null)
+                {
+                    return null;
+                }
+                return new GenericItemDTO
+                {
+                    Id = obj.ReferentId,
+                    Detail = obj.ReferentRUT.ToString()
+                };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<List<GenericItemDTO>> GetReferentsByOrganizationId(int organizationId)
+        {
+            try
+            {
+                var obj = context.Referent.ToList().Where(x => x.IsDeleted == false && x.OrganizationId == organizationId);
+                if (obj == null)
+                {
+                    return null;
+                }
+                List<GenericItemDTO> referentList = new List<GenericItemDTO>();
+                foreach (var item in obj.ToList())
+                {
+                    referentList.Add(new GenericItemDTO
+                    {
+                        Id = item.ReferentId,
+                        Detail = item.ReferentRUT.ToString()
+                    });
+                }
+                return referentList;
             }
             catch (Exception ex)
             {

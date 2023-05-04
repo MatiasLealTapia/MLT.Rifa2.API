@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MLT.Rifa2.API.Models
+﻿namespace MLT.Rifa2.API.Models
 {
     public partial class OrganizationType
     {
