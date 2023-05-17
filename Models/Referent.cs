@@ -10,6 +10,7 @@
         public string ReferentCode { get; set; }
         public string ReferentEmail { get; set; }
         public int ReferentPhone { get; set; }
+        public string ReferentToken { get; set; }
         public DateTime ReferentBirthDay { get; set; }
         public int OrganizationId { get; set; }
         public Organization Organization { get; set; }
