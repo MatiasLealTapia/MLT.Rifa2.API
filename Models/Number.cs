@@ -2,13 +2,11 @@
 {
     public partial class Number
     {
-        public Guid NumberId { get; set; }
+        public int NumberId { get; set; }
         public int NumberPosition { get; set; }
-        public int NumberPrice { get; set; }
-        public int UserRut { get; set; }
         public int RaffleId { get; set; }
         public Raffle Raffle { get; set; }
-        public DateTime PurchaseDate { get; set; }
+        public bool IsBuyed { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

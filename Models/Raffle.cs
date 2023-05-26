@@ -5,7 +5,7 @@
         public int RaffleId { get; set; }
         public string RaffleName { get; set; }
         public string RaffleDescription { get; set; }
-        public string RaffleNumberPrice { get; set; }
+        public int RaffleNumberPrice { get; set; }
         public int RaffleNumbersAmount { get; set; }
         public DateTime RaffleBeginDate { get; set; }
         public DateTime RaffleEndDate { get; set; }
