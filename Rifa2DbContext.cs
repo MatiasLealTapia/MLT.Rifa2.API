@@ -11,6 +11,7 @@ namespace MLT.Rifa2.API
 
         public virtual DbSet<Organization> Organization { get; set; }
         public virtual DbSet<OrganizationType> OrganizationType { get; set; }
+        public virtual DbSet<OrganizationForm> OrganizationForm { get; set; }
         public virtual DbSet<OrgAdmin> OrgAdmin { get; set; }
         public virtual DbSet<Admin> Admin { get; set; }
         public virtual DbSet<Referent> Referent { get; set; }
