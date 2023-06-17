@@ -15,6 +15,7 @@ builder.Services.AddDbContext<Rifa2DbContext>(options => options.UseSqlServer("n
 
 builder.Services.AddScoped<IOrganizationTypeService, OrganizationTypeService>();
 builder.Services.AddScoped<IOrganizationService, OrganizationService>();
+builder.Services.AddScoped<IOrganizationFormService, OrganizationFormService>();
 builder.Services.AddScoped<IGenericService, GenericService>();
 builder.Services.AddScoped<IReferentService, ReferentService>();
 

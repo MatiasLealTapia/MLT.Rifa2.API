@@ -14,10 +14,11 @@ namespace MLT.Rifa2.API.Services
             this.context = context;
             _genericService = genericService;
         }
-        public async Task<OrganizationFormDTO> Add(OrganizationFormDTO organizationFormDTO)
+        public async Task<String> Add(OrganizationFormDTO organizationFormDTO)
         {
             try
             {
+                var response = "F";
                 var orgType = await _genericService.GetOrganizationType(organizationFormDTO.OrganizationTypeId);
                 if (orgType == null)
                 {
@@ -35,19 +36,12 @@ namespace MLT.Rifa2.API.Services
                     IsDeleted = false,
                 };
                 context.OrganizationForm.Add(objAdd);
-                await context.SaveChangesAsync();
-                return new OrganizationFormDTO
+                var isSaved = await context.SaveChangesAsync();
+                if (isSaved > 0)
                 {
-                    OrganizationFormId = objAdd.OrganizationFormId,
-                    OrganizationName = objAdd.OrganizationName,
-                    OrganizationEmail = objAdd.OrganizationEmail,
-                    OrganizationPhoneNumber = objAdd.OrganizationPhoneNumber,
-                    OrganizationFormInformation = objAdd.OrganizationFormInformation
-                    OrganizationTypeId = objAdd.OrganizationTypeId,
-                    OrganizationTypeName = orgType.Detail,
-                    IsAcepted = objAdd.IsAcepted,
-                    IsDeleted = objAdd.IsDeleted,
-                };
+                    response = "T";
+                }
+                return response;
             }
             catch (Exception ex)
             {
