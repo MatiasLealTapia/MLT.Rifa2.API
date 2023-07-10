@@ -1,5 +1,4 @@
-﻿using MLT.Rifa2.API.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MLT.Rifa2.API.DTOs
 {

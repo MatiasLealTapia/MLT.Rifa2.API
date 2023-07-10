@@ -18,6 +18,7 @@ builder.Services.AddScoped<IOrganizationService, OrganizationService>();
 builder.Services.AddScoped<IOrganizationFormService, OrganizationFormService>();
 builder.Services.AddScoped<IGenericService, GenericService>();
 builder.Services.AddScoped<IReferentService, ReferentService>();
+builder.Services.AddScoped<IRaffleService, RaffleService>();
 
 var app = builder.Build();
 

@@ -9,5 +9,6 @@ namespace MLT.Rifa2.API.Interfaces
         Task<OrganizationDTO> Update(OrganizationDTO organizationDTO);
         Task<OrganizationDTO> Delete(OrganizationDTO organizationDTO);
         Task<List<OrganizationDTO>> List();
+        Task<OrganizationDTO> Login(OrgAdminLogInDTO logInDTO);
     }
 }

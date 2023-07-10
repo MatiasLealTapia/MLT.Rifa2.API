@@ -94,5 +94,22 @@ namespace MLT.Rifa2.API.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPost]
+        [Route("Login")]
+        public async Task<ActionResult<OrganizationDTO>> Login([FromBody] OrgAdminLogInDTO logInDTO)
+        {
+            try
+            {
+                var orgDTO = await _organizationService.Login(logInDTO);
+                if (orgDTO == null)
+                    return NotFound();
+                return Ok(orgDTO);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+        }
     }
 }

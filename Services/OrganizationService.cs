@@ -195,5 +195,41 @@ namespace MLT.Rifa2.API.Services
                 throw ex;
             }
         }
+
+        public async Task<OrganizationDTO> Login(OrgAdminLogInDTO logInDTO)
+        {
+            try
+            {
+                var verifyCredentials = await context.OrgAdmin.FirstOrDefaultAsync(
+                                        x => x.OrgAdminEmail == logInDTO.OrgAdminEmail &&
+                                        x.OrgAdminPasswordHash == logInDTO.OrgAdminPasswordHash);
+                if (verifyCredentials == null)
+                {
+                    return null;
+                }
+                var org = await context.Organization.FirstOrDefaultAsync(
+                                    x => x.OrganizationId == verifyCredentials.OrganizationId);
+                if (org.IsDeleted || !org.IsActive) 
+                {
+                    return null;
+                }
+                var orgType = await context.OrganizationType.FirstOrDefaultAsync(
+                                x => x.OrganizationTypeId == org.OrganizationTypeId);
+                return new OrganizationDTO
+                {
+                    OrganizationId = org.OrganizationId,
+                    OrganizationName = org.OrganizationName,
+                    OrganizationTypeId = org.OrganizationTypeId,
+                    OrganizationTypeName = orgType.OrganizationTypeName,
+                    CreationDate = org.CreationDate,
+                    IsActive = org.IsActive,
+                    IsDeleted = org.IsDeleted,
+                };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

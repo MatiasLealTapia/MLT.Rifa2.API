@@ -21,5 +21,6 @@ namespace MLT.Rifa2.API
         public virtual DbSet<NumberPurchased> NumberPurchased { get; set; }
         public virtual DbSet<Reward> Reward { get; set; }
         public virtual DbSet<Winner> Winner { get; set; }
+        public virtual DbSet<FlowPayment> FlowPayment { get; set; }
     }
 }
